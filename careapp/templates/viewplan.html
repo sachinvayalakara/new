@@ -1,0 +1,54 @@
+{% extends 'adminhome.html' %}
+
+{% block content %}
+
+<style>
+
+.magnify {
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.magnify:hover {
+    transform: scale(1.1);
+}
+
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Plan</h3>
+        </div>
+    </div>
+
+    <div class="row">
+
+        {% for plan in plans %}
+        <a href="/care/viewplan?id={{plan.id}}">
+            <div class="col-lg-4 magnify">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{ plan.plan_title }}
+                        
+                        <br>
+                        <span class="small" style="color: rgb(129, 129, 129);">
+                            {{ plan.plan_price }} INR
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+
+    </div>
+
+
+    {% block plan %}
+   
+    {% endblock %}
+
+</div>
+
+{% endblock %}

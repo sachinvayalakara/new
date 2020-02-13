@@ -1,0 +1,62 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<style type="text/css">
+
+.img-fluid{
+	height: 750px;
+}
+h1{
+	font-family: "Times New Roman", Times, serif;
+}
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#f{
+    font-family:Montserrat, sans-serif;
+    color: #ffffff;
+	font-size: 50px;
+  }
+
+</style>
+<body>
+	<div class="container-fluid h-100">
+		
+		<div class="row h-100">
+			<div class="col-lg-6 img-fluid d-flex flex-row justify-content-center align-items-center" style="background-image: url('{% static 'images/wb.jpg' %}')">
+				<label class="d-flex justify-content-center">
+				<a href="/care/home/#contact">
+					<div class="panel panel-default">
+						<div class="panel-body">	
+				<img src="{% static 'images/black.jpg' %}" width="300">
+				<div class="centered" id="f">Centered</div>
+				<span class="small" style="color: rgb(129, 129, 129);">
+					</span>
+				</div>
+				</div>
+				
+			</a>
+		</label>
+			</div>
+			<div class="col-lg-6 img-fluid d-flex flex-row justify-content-center align-items-center" style="background-image: url('{% static 'images/wa.jpg' %}');">
+				<label class="d-flex justify-content-center"><a href="/care/home/#contact"><img src="{% static 'images/black.jpg' %}" width="300"></a></label>
+			</div>
+			
+		</div>
+
+	</div>
+</body>
+</html>

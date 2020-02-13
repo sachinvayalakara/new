@@ -1,0 +1,109 @@
+{% extends 'adminhome.html' %}
+
+{% block content %}
+
+<h1>Create plan</h1> <br>
+
+        <div class="container-fluid bg-grey">
+            <div class="col-sm-7 slideanim">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input class="form-control" id="title" placeholder="Enter the plan title" type="text">
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input class="form-control" id="price" min="0" placeholder="Enter the plan price" type="number">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Service" id="service">
+                            <div class="input-group-btn">
+                                <button onclick="fn_add_service();" class="btn btn-info" >Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul id="services"></ul>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button onclick="fn_save();" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+
+    const services = [];
+
+    function fn_add_service() {
+        const service = $('#service').val();
+        if (service.length > 0) {
+            $('#services').append('<li>' + service + '</li>');
+            services.push(service);
+            $('#service').val('');
+        }
+    }
+
+    function fn_save() {
+
+        let flag = false;
+        if ($('#title').val().length > 0) {
+            flag = true;
+            $('#title').css({'border-color': 'grey'});
+        } else {
+            flag = false;
+            $('#title').css({'border-color': 'red'});
+        }
+
+        if ($('#price').val().length > 0) {
+            flag = true;
+            $('#price').css({'border-color': 'grey'});
+        } else {
+            flag = false;
+            $('#price').css({'border-color': 'red'});
+        }
+
+        if (services.length > 0) {
+            flag = true;
+            $('#service').css({'border-color': 'grey'});
+        } else {
+            flag = false;
+            $('#service').css({'border-color': 'red'});
+        }
+
+        if (flag) {
+            const plan = {
+                title: $('#title').val(),
+                price : $('#price').val(),
+                services,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }
+            $.ajax({
+                url: 'http://127.0.0.1:8000/care/createplan/',
+                type: 'POST',
+                data: plan,
+                success: res => {
+                    if (res == 1) {
+                        $('#title').val('');
+                        $('#price').val('');
+                        $('#services').html('');
+                    }
+                },
+                error: err => {
+                    console.log(err);
+                }
+            });
+        }
+    }
+
+</script>  
+
+
+{% endblock %}
